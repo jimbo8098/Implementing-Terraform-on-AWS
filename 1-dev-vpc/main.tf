@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.8.0"
+    }
+  }
+}
+
 #############################################################################
 # VARIABLES
 #############################################################################
@@ -29,7 +38,6 @@ variable "database_subnets" {
 #############################################################################
 
 provider "aws" {
-  version = "~> 2.0"
   region  = var.region
 }
 
@@ -45,7 +53,6 @@ data "aws_availability_zones" "azs" {}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.33.0"
 
   name = "dev-vpc"
   cidr = var.vpc_cidr_range
