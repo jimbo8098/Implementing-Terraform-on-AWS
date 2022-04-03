@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.8.0"
+    }
+  }
+}
+
 #############################################################################
 # VARIABLES
 #############################################################################
@@ -47,13 +56,11 @@ variable "database_subnets_west" {
 #############################################################################
 
 provider "aws" {
-  version = "~> 2.0"
   region  = var.region_1
   alias = "east"
 }
 
 provider "aws" {
-  version = "~> 2.0"
   region  = var.region_2
   alias = "west"
 }
@@ -76,7 +83,7 @@ data "aws_availability_zones" "azs_west" {
 
 module "vpc_east" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.33.0"
+  version = "3.14.0"
 
   name = "prod-vpc-east"
   cidr = var.vpc_cidr_range_east
@@ -104,7 +111,7 @@ module "vpc_east" {
 
 module "vpc_west" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.33.0"
+  version = "3.14.0"
 
   name = "prod-vpc-west"
   cidr = var.vpc_cidr_range_west
